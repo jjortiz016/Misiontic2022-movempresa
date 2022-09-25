@@ -22,10 +22,10 @@ public class Employee {
     private String phone;
 
     private enum role { Admin, Operario; }
-/*
+
     @ManyToOne(fetch = FetchType.LAZY, optional =false)
     @JoinColumn(name="enterprise_id", nullable = false)
-    private Enterprise enterprise;*/
+    private Enterprise enterprise;
     private String image;
              //mappedBy = "transaction", fetch = FetchType.LAZY, cascade = CascadeType.ALL
     @OneToMany(mappedBy = "employee", fetch = FetchType.LAZY, cascade = CascadeType.ALL)

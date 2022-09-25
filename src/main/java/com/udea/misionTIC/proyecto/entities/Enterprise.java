@@ -25,10 +25,10 @@ public class Enterprise implements Serializable {
     @OneToMany(mappedBy = "enterprise", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonIgnore
     private Set<Transaction> transaction; //La interfaz Set es la interfaz que nos definirá un conjunto de elementos. También al igual que la anterior no admite elementos duplicados, ni nulos.
-/*
-    @OneToMany(mappedBy= "employee", fetch= FetchType.LAZY, cascade=CascadeType.ALL)
+
+    @OneToMany(mappedBy= "enterprise", fetch= FetchType.LAZY, cascade=CascadeType.ALL)
     @JsonIgnore
-    private Set<Employee> user;*/
+    private Set<Employee> user;
     private LocalDate createdAt;
     private Date updateAt;
 
