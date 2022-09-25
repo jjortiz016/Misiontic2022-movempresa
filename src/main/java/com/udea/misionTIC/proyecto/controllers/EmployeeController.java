@@ -1,6 +1,7 @@
 package com.udea.misionTIC.proyecto.controllers;
 
 import com.udea.misionTIC.proyecto.entities.Employee;
+import com.udea.misionTIC.proyecto.services.IEmployeeService;
 import com.udea.misionTIC.proyecto.services.Response;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,9 +22,9 @@ public class EmployeeController {
 
     @GetMapping("/employee/{id}")
     public Employee getEmployeeById(@PathVariable Long id){
-        return this.iEmployeeService.getEmployeeBYId(id);
-        }
+        return this.iEmployeeService.getEmployeeById(id);
     }
+
 
     @PostMapping("/employee")
     public Employee newEmployee(@RequestBody Employee employee) {
@@ -31,7 +32,7 @@ public class EmployeeController {
     }
 
     @DeleteMapping("deleteEmployee/{id}")
-    public Response deleteEmployee(@PatchMapping Long id) {
+    public Response deleteEmployee(@PathVariable Long id) {
 
       return  this.iEmployeeService.deleteEmployee(id);
     }
