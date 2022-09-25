@@ -21,7 +21,10 @@ public class Employee {
     @Column (name="phone", length = 30)
     private String phone;
 
-    private enum role { Admin, Operario; }
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_type", nullable= false)
+    private RoleType role;
+
 
     @ManyToOne(fetch = FetchType.LAZY, optional =false)
     @JoinColumn(name="enterprise_id", nullable = false)
@@ -76,14 +79,23 @@ public class Employee {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-/*
+
+    public RoleType getRole() {
+        return role;
+    }
+
+    public void setRole(RoleType role) {
+        this.role = role;
+    }
+
+
     public Enterprise getEnterprise() {
         return enterprise;
     }
 
     public void setEnterprise(Enterprise enterprise) {
         this.enterprise = enterprise;
-    }*/
+    }
 
     public String getImage() {
         return image;

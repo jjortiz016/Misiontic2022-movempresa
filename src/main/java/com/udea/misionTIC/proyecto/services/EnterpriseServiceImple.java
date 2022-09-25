@@ -65,6 +65,7 @@ public class EnterpriseServiceImple implements IEnterpriseService {
         }*/
         enterpriseEncontrado.setPhone(enterprise.getPhone());
         enterpriseEncontrado.setAddress(enterprise.getAddress());
+
         this.enterpriseRepository.save(enterpriseEncontrado);
         response.setCode(200);
         response.setMessage("La empresa fue actualizada correctamente!!!");
