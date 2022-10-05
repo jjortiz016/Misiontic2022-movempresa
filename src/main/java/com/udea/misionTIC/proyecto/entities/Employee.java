@@ -1,8 +1,10 @@
 package com.udea.misionTIC.proyecto.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="employee")
-public class Employee {
+public class Employee implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -24,10 +26,9 @@ public class Employee {
     @Enumerated(EnumType.STRING)
     @Column(name = "role_type", nullable= false)
     private RoleType role;
-
-
     @ManyToOne(fetch = FetchType.LAZY, optional =false)
-    @JoinColumn(name="enterprise_id", nullable = false)
+    @JoinColumn(name="enterprise_id", referencedColumnName = "id", nullable = false)
+   // @JsonSerialize
     private Enterprise enterprise;
     private String image;
              //mappedBy = "transaction", fetch = FetchType.LAZY, cascade = CascadeType.ALL
@@ -40,11 +41,12 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(String name, String email, String phone,  String image) {
+    public Employee(String name, String email, String phone, RoleType role, Enterprise enterprise, String image) {
         this.name = name;
         this.email = email;
         this.phone = phone;
-       // this.enterprise = enterprise;
+        this.role= role;
+        this.enterprise = enterprise;
         this.image = image;
     }
 
@@ -119,5 +121,21 @@ public class Employee {
 
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", email='" + email + '\'' +
+                ", phone='" + phone + '\'' +
+                ", role=" + role +
+                ", enterprise=" + enterprise +
+                ", image='" + image + '\'' +
+                ", transaction=" + transaction +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }

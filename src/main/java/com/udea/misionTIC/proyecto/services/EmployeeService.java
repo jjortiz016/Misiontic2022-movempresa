@@ -3,9 +3,11 @@ package com.udea.misionTIC.proyecto.services;
 import com.udea.misionTIC.proyecto.entities.Employee;
 import com.udea.misionTIC.proyecto.entities.Enterprise;
 import com.udea.misionTIC.proyecto.repositories.EmployeeRepository;
+import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
-
+@Service
 public class EmployeeService implements IEmployeeService {
     private EmployeeRepository employeeRepository;
 
@@ -26,6 +28,7 @@ public class EmployeeService implements IEmployeeService {
 
     @Override
     public Employee newEmployee(Employee employee) {
+        employee.setCreatedAt(LocalDate.now());
         return this.employeeRepository.save(employee);
     }
 
@@ -60,7 +63,7 @@ public class EmployeeService implements IEmployeeService {
         employeeEncontrado.setName(employee.getName());
         employeeEncontrado.setPhone(employee.getPhone());
         employeeEncontrado.setEmail(employee.getEmail());
-        employeeEncontrado.setRole(employee.getRole());4
+        employeeEncontrado.setRole(employee.getRole());
         employeeEncontrado.setEnterprise(employee.getEnterprise());
         employeeEncontrado.setImage(employeeEncontrado.getImage());
 

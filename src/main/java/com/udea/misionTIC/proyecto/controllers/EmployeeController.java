@@ -6,7 +6,7 @@ import com.udea.misionTIC.proyecto.services.Response;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+//@RequestMapping ("/employee")
 @RestController
 public class EmployeeController {
     private IEmployeeService iEmployeeService;
@@ -19,6 +19,8 @@ public class EmployeeController {
     public List<Employee> getEmployeeList(){
         return this.iEmployeeService.getEmployeeList();
     }
+
+
 
     @GetMapping("/employee/{id}")
     public Employee getEmployeeById(@PathVariable Long id){

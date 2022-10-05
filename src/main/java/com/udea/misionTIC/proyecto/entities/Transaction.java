@@ -8,17 +8,22 @@ import java.util.Date;
 @Entity
 @Table(name="transaction")
 public class Transaction implements Serializable {
+
     @Id
-    @GeneratedValue (strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String concept;
     private double amount;
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name= "enterprise_id", nullable = false)
+  //  @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
+
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name= "enterprise_id", referencedColumnName ="id", nullable = false)
     private Enterprise enterprise;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, optional = false)
-    @JoinColumn(name= "employee_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name= "employee_id", referencedColumnName ="id", nullable = false)
     private Employee employee;
     private LocalDate createdAt;
     private Date updatedAt;
@@ -56,7 +61,7 @@ public class Transaction implements Serializable {
         return amount;
     }
 
-    public void setAmount(float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 
@@ -68,12 +73,6 @@ public class Transaction implements Serializable {
         this.enterprise = enterprise;
     }
 
-
-
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public Employee getEmployee() {
         return employee;
     }
@@ -81,18 +80,33 @@ public class Transaction implements Serializable {
     public void setEmployee(Employee employee) {
         this.employee = employee;
     }
+
     public LocalDate getCreatedAt() {
         return createdAt;
     }
+
     public void setCreatedAt(LocalDate createdAt) {
         this.createdAt = createdAt;
     }
 
-    public Date getUpdateddAt() {
+    public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdateddAt(Date updatedAt) {
+    public void setUpdatedAt(Date updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "id=" + id +
+                ", concept='" + concept + '\'' +
+                ", amount=" + amount +
+                ", enterprise=" + enterprise +
+                ", employee=" + employee +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }
